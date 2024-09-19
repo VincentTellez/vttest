@@ -1,5 +1,0 @@
----
-title: "Test"
----
-
-Here is a test file. Let's see how it looks.
