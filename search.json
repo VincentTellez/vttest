@@ -33,5 +33,19 @@
     "title": "Assignments",
     "section": "Assignments",
     "text": "Assignments"
+  },
+  {
+    "objectID": "assignments.html",
+    "href": "assignments.html",
+    "title": "Assignments",
+    "section": "",
+    "text": "This is where all of the Assignments for Data Visualization will be posted."
+  },
+  {
+    "objectID": "test.html",
+    "href": "test.html",
+    "title": "Test",
+    "section": "",
+    "text": "Here is a test file. Let’s see how it looks."
   }
 ]
