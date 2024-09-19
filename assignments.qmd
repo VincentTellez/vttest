@@ -1,0 +1,11 @@
+---
+title: "Assignments"
+author: "Vincent Tellez"
+format:
+  html:
+    theme: journal
+---
+
+This is where all of the Assignments for Data Visualization will be posted.
+
+
