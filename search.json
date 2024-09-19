@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "EPPS 6356: Data Visualization",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.\n\n1 + 1\n\n[1] 2\n\n\n\ntopic 1\n## Abstract\n\n\nThe other thing\n\nare bullet points\n\ntext-as string\n:::[used to create different callout blocks] Thes include warnings, tips, cautions\n\n\n\nHeader 1\nHeader 2\nHeader 3\n\n\n\n\nvalue 1\nvalue 2\nvalue 3"
+  },
+  {
+    "objectID": "Assignment 1.html",
+    "href": "Assignment 1.html",
+    "title": "EPPS 6356: Assignment 1",
+    "section": "",
+    "text": "Part 1 Summary\nThis assignment had us look at Anscombe’s Quartet, a collection of four sets of data points that create the same linear regression model even though the distributions vary greatly across all models.\n\n\nCode\ndata(anscombe)# Load Anscombe's data\nView(anscombe) # View the data\nsummary(anscombe)\n\n\n       x1             x2             x3             x4           y1        \n Min.   : 4.0   Min.   : 4.0   Min.   : 4.0   Min.   : 8   Min.   : 4.260  \n 1st Qu.: 6.5   1st Qu.: 6.5   1st Qu.: 6.5   1st Qu.: 8   1st Qu.: 6.315  \n Median : 9.0   Median : 9.0   Median : 9.0   Median : 8   Median : 7.580  \n Mean   : 9.0   Mean   : 9.0   Mean   : 9.0   Mean   : 9   Mean   : 7.501  \n 3rd Qu.:11.5   3rd Qu.:11.5   3rd Qu.:11.5   3rd Qu.: 8   3rd Qu.: 8.570  \n Max.   :14.0   Max.   :14.0   Max.   :14.0   Max.   :19   Max.   :10.840  \n       y2              y3              y4        \n Min.   :3.100   Min.   : 5.39   Min.   : 5.250  \n 1st Qu.:6.695   1st Qu.: 6.25   1st Qu.: 6.170  \n Median :8.140   Median : 7.11   Median : 7.040  \n Mean   :7.501   Mean   : 7.50   Mean   : 7.501  \n 3rd Qu.:8.950   3rd Qu.: 7.98   3rd Qu.: 8.190  \n Max.   :9.260   Max.   :12.74   Max.   :12.500  \n\n\n\n\nCode\n## Simple version\n# plot(anscombe$x1,anscombe$y1)\n# summary(anscombe)\n\n# Create four model objects\nlm1 &lt;- lm(y1 ~ x1, data=anscombe)\n# summary(lm1)\nlm2 &lt;- lm(y2 ~ x2, data=anscombe)\n# summary(lm2)\nlm3 &lt;- lm(y3 ~ x3, data=anscombe)\n# summary(lm3)\nlm4 &lt;- lm(y4 ~ x4, data=anscombe)\n# summary(lm4)\n# plot(anscombe$x1,anscombe$y1)\n# abline(coefficients(lm1))\n# plot(anscombe$x2,anscombe$y2)\n# abline(coefficients(lm2))\n# plot(anscombe$x3,anscombe$y3)\n# abline(coefficients(lm3))\n# plot(anscombe$x4,anscombe$y4)\n# abline(coefficients(lm4))\n\n\n## Fancy version (per help file)\n\nff &lt;- y ~ x\nmods &lt;- setNames(as.list(1:4), paste0(\"lm\", 1:4))\n\n# Plot using for loop\nfor(i in 1:4) {\n  ff[2:3] &lt;- lapply(paste0(c(\"y\",\"x\"), i), as.name)\n  ## or   ff[[2]] &lt;- as.name(paste0(\"y\", i))\n  ##      ff[[3]] &lt;- as.name(paste0(\"x\", i))\n  mods[[i]] &lt;- lmi &lt;- lm(ff, data = anscombe)\n  print(anova(lmi))\n}\n\n\nAnalysis of Variance Table\n\nResponse: y1\n          Df Sum Sq Mean Sq F value  Pr(&gt;F)   \nx1         1 27.510 27.5100   17.99 0.00217 **\nResiduals  9 13.763  1.5292                   \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nAnalysis of Variance Table\n\nResponse: y2\n          Df Sum Sq Mean Sq F value   Pr(&gt;F)   \nx2         1 27.500 27.5000  17.966 0.002179 **\nResiduals  9 13.776  1.5307                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nAnalysis of Variance Table\n\nResponse: y3\n          Df Sum Sq Mean Sq F value   Pr(&gt;F)   \nx3         1 27.470 27.4700  17.972 0.002176 **\nResiduals  9 13.756  1.5285                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\nAnalysis of Variance Table\n\nResponse: y4\n          Df Sum Sq Mean Sq F value   Pr(&gt;F)   \nx4         1 27.490 27.4900  18.003 0.002165 **\nResiduals  9 13.742  1.5269                    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nCode\nsapply(mods, coef)  # Note the use of this function\n\n\n                  lm1      lm2       lm3       lm4\n(Intercept) 3.0000909 3.000909 3.0024545 3.0017273\nx1          0.5000909 0.500000 0.4997273 0.4999091\n\n\n\n\nCode\n# lapply(mods, function(fm) coef(summary(fm)))\n# Preparing for the plots\nop &lt;- par(mfrow = c(2, 2), mar = 0.1+c(4,4,1,1), oma =  c(0, 0, 2, 0))\n\n# Plot charts using for loop\nfor(i in 1:4) {\n  ff[2:3] &lt;- lapply(paste0(c(\"y\",\"x\"), i), as.name)\n  plot(ff, data = anscombe, col = \"red\", pch = 21, bg = \"orange\", cex = 1.2,\n       xlim = c(3, 19), ylim = c(3, 13))\n  abline(mods[[i]], col = \"blue\")\n}\nmtext(\"Anscombe's 4 Regression Data Sets\", outer = TRUE, cex = 1.5)\n\n\n\n\n\n\n\n\n\nCode\npar(op)"
+  },
+  {
+    "objectID": "Assignments.html",
+    "href": "Assignments.html",
+    "title": "Assignments",
+    "section": "",
+    "text": "This is where all of the Assignments for Data Visualization will be posted."
+  },
+  {
+    "objectID": "Assignments.html#assignments",
+    "href": "Assignments.html#assignments",
+    "title": "Assignments",
+    "section": "Assignments",
+    "text": "Assignments"
+  }
+]
