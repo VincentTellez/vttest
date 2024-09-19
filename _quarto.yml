@@ -9,7 +9,7 @@ website:
         text: Home
       - href: about.qmd
         text: About
-      - href: assignments.qmd
+      - href: assignmain.qmd
         text: Assignments
       - href: test.qmd
         text: test
