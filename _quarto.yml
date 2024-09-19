@@ -1,0 +1,28 @@
+project:
+  type: website
+
+website:
+  title: "EPPS 6356: Data Visualization"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: assignments.qmd
+        text: Assignments
+      - href: test.qmd
+        text: test
+        
+
+format:
+  html:
+    theme:
+      light: journal
+      dark: darkly
+    css: styles.css
+    highlight-style: ally
+    toc: true
+
+editor: visual
+
